@@ -24,8 +24,9 @@ async function run() {
 
     await exec.exec(home.concat("/miniconda/bin/conda"), ["config", "--set", "always_yes", "yes"]);
 
+    await exec.exec(home.concat("/miniconda/bin/conda"), ["install", "conda-libmamba-solver"]);
     // Strictly speaking, only the galaxy tests need planemo and samtools
-    await exec.exec(home.concat("/miniconda/bin/conda"), ["create", "-n", "foo", "-q", "--yes", "-c", "conda-forge", "-c", "bioconda", "python=3.7", "numpy", "scipy", "matplotlib==3.1.1", "nose", "flake8", "plotly", "pysam", "pyBigWig", "py2bit", "deeptoolsintervals", "planemo", "samtools"]);
+    await exec.exec(home.concat("/miniconda/bin/conda"), ["create", "-n", "foo", "-q", "--yes", "-c", "conda-forge", "-c", "bioconda", "--experimental-solver", "libmamba", "python=3.7", "numpy", "scipy", "matplotlib==3.1.1", "nose", "flake8", "plotly", "pysam", "pyBigWig", "py2bit", "deeptoolsintervals", "planemo", "samtools"]);
 
     // Caching should end here
 
